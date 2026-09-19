@@ -1,9 +1,9 @@
 # Báo cáo tổng hợp AAC-LC HW/SW Codesign
 
-Thư mục này là bản báo cáo rút gọn của `my_workspace`. Nội dung chỉ giữ tài liệu
-tổng hợp; mã nguồn, vector kiểm thử, ảnh, file build và artifact phần cứng không
-được sao chép vào đây. Mỗi hạng mục có đúng một `README.md` để thuận tiện đưa lên
-Git và gửi đường dẫn báo cáo.
+Thư mục này là bản bàn giao rút gọn của `my_workspace`. Mỗi hạng mục có đúng một
+`README.md` tổng hợp và kèm theo các file code/build config tương ứng. Tài liệu
+rời, vector kiểm thử, ảnh, ZIP, file build và artifact phần cứng không được sao
+chép, giúp repository đủ mã nguồn nhưng vẫn gọn để đưa lên Git.
 
 ## 1. Mục tiêu dự án
 
@@ -45,11 +45,11 @@ flowchart LR
 | [Block Switching](block_switch/) | Phát hiện transient, chọn LONG/START/SHORT/STOP | 5 file | PS | PASS bit-exact 292 frame/25 kịch bản |
 | [Window/MDCT](window_mdct/) | Window, TDAC fold, DCT-IV qua FFT radix-2 | 56 file | PL + driver PS | RTL/golden khớp 0 LSB |
 | [Psychoacoustic Model](psychoacoustic_model/) | SFB, masking, TNS/PNS và tạo `PSY_OUT` | 0 file riêng; khảo sát source FDK | PS | Đã chốt ranh giới tích hợp MDCT |
-| [Quantization/Coding](quantization_coding/) | Scalefactor, quantize, bit count, Huffman | 16 file | PS; QMAX là ứng viên PL | Reference ready, RTL chưa bắt đầu |
+| [Quantization/Coding](quantization_coding/) | Scalefactor, quantize, bit count, Huffman | 18 file | PS; QMAX là ứng viên PL | Reference ready, RTL chưa bắt đầu |
 | [PYNQ-Z2](pynq_z2/) | Build native, chạy encoder và profiling trên board | 2 script | PS/board | Có quy trình baseline và profiling |
 
-Tổng cộng có **81 file code/cấu hình** trong `my_workspace` được kiểm kê và mô tả
-trong sáu README chuyên mục.
+Tổng cộng có **83 file code/build config** được chuyển từ `my_workspace`, giữ
+nguyên đường dẫn tương đối và được mô tả trong sáu README chuyên mục.
 
 ## 3. Luồng dữ liệu và giao diện chính
 
@@ -81,17 +81,17 @@ trong sáu README chuyên mục.
 ```text
 my_workspace_aac/
 ├── README.md
-├── INPUT/README.md
-├── block_switch/README.md
-├── window_mdct/README.md
-├── psychoacoustic_model/README.md
-├── quantization_coding/README.md
-└── pynq_z2/README.md
+├── INPUT/                    README + C++/Python input tools
+├── block_switch/             README + reference/testbench/tools
+├── window_mdct/              README + RTL/reference/driver/test/build flow
+├── psychoacoustic_model/     README (không có code riêng trong workspace gốc)
+├── quantization_coding/      README + C++/Python reference/regression
+└── pynq_z2/                  README + script baseline/profiling
 ```
 
 ## 6. Phạm vi và nguồn tổng hợp
 
-Báo cáo được tổng hợp từ snapshot cục bộ `my_workspace` ngày 18/09/2026. Các
-đường dẫn source trong từng README là đường dẫn tương đối của workspace gốc;
-chúng được giữ lại để truy vết kỹ thuật, không phải file nằm trong repo báo cáo.
-
+Bản bàn giao được tổng hợp từ snapshot cục bộ `my_workspace` ngày 18/09/2026.
+Các đường dẫn source trong từng README cũng là đường dẫn tương đối trong repo
+này. Một số harness vẫn tham chiếu source FDK-AAC ở repository cha, nên cần đặt
+repo này cạnh source FDK-AAC nếu muốn chạy nguyên các lệnh build đó.

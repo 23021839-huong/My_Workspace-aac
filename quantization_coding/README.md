@@ -15,7 +15,7 @@ PSY_OUT
   → ghi AAC bitstream
 ```
 
-## 2. Kiểm kê 16 file code
+## 2. Kiểm kê 18 file code/build config
 
 ### 2.1 Reference C++
 
@@ -24,6 +24,8 @@ PSY_OUT
 | `quantization_reference/cpp_ref/quantization_ref.h` | API, cấu trúc vector và hợp đồng quantizer C++. |
 | `.../quantization_ref.cpp` | Hiện thực fixed-point portable của spectral quantization và thống kê theo SFB. |
 | `.../main.cpp` | CLI đọc vector input, chạy reference và ghi output/trace. |
+| `.../fdk_quant_tables.inc` | Bảng fixed-point sinh từ FDK được include vào reference C++. |
+| `.../CMakeLists.txt` | Cấu hình build executable reference C++. |
 
 ### 2.2 Reference Python
 
@@ -113,4 +115,3 @@ AAC-LC mono, frame 1024, input Q31, output signed 16-bit, layout SFB runtime,
 hỗ trợ LONG/START/SHORT/STOP, dead-zone runtime và trả cả quantized spectrum lẫn
 max magnitude/SFB. Mọi LUT, normalize, shift, offset, wrap và cast phải giữ đúng
 hành vi FDK để đạt bit-exact.
-
